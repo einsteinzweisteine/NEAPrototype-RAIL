@@ -1,0 +1,9 @@
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\obj\Debug\NEAPrototype-Transport.csproj.AssemblyReference.cache
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\obj\Debug\NEAPrototype_Transport.Properties.Resources.resources
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\obj\Debug\NEAPrototype-Transport.csproj.GenerateResource.cache
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\obj\Debug\NEAPrototype-Transport.csproj.CoreCompileInputs.cache
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\bin\Debug\NEAPrototype-Transport.exe.config
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\bin\Debug\NEAPrototype-Transport.exe
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\bin\Debug\NEAPrototype-Transport.pdb
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\obj\Debug\NEAPrototype-Transport.exe
+U:\Documents\Computer Science\NEAPrototype-Transport\NEAPrototype-Transport\obj\Debug\NEAPrototype-Transport.pdb
