@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NEAPrototype_Transport
 {
-    public abstract class Place
+    public abstract class Place:SimObject
     {
         private static int idGlobal = 0;
         private readonly int id;
@@ -59,6 +59,11 @@ namespace NEAPrototype_Transport
             this.pos = pos;
             this.trackConn = trackConn;
         }
+
+        protected override void Process()
+        {
+
+        }
     }
 
     public class Track:Place
@@ -83,59 +88,9 @@ namespace NEAPrototype_Transport
         {
             this.lwrConn = lwrConn;
         }
-    }
 
-    public class Terminator:Place
-    {
-        private static int termIdGlobal = 0;
-        private readonly int termId;
-
-        private static List<Terminator> termList = new List<Terminator> { };
-
-        private int[] pos;
-
-        public Terminator(int[] pos)
+        protected override void Process()
         {
-            termId = termIdGlobal;
-            termId++;
-            this.pos = pos;
-            termList.Add(this);
-        }
-    }
-
-    public class TurnAround:Place
-    {
-        private static int turnIdGlobal = 0;
-        private readonly int turnId;
-
-        private static List<TurnAround> turnList = new List<TurnAround> { };
-
-        private int[] pos;
-
-        public TurnAround(int[] pos)
-        {
-            turnId = turnIdGlobal;
-            turnIdGlobal++;
-            this.pos = pos;
-            turnList.Add(this);
-        }
-    }
-
-    public class Node:Place
-    {
-        private static int nodeIdGlobal = 0;
-        private readonly int nodeId;
-
-        private static List<Node> nodeList = new List<Node> { };
-
-        private int[] pos;
-
-        public Node(int[] pos)
-        {
-            nodeId = nodeIdGlobal;
-            nodeIdGlobal++;
-            this.pos = pos;
-            nodeList.Add(this);
         }
     }
 }

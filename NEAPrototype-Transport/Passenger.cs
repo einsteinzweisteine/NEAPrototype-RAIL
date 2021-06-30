@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NEAPrototype_Transport
 {
-    public class Passenger
+    public class Passenger:SimObject
     {
         public enum State
         {
@@ -16,22 +16,25 @@ namespace NEAPrototype_Transport
         }
 
         public State state;
-        private static int passId = 0;
+        private static int globalPassId = 0;
+        private readonly int passId = 0;
         Station currentStation;
         Station targetStation;
         Train trainAssigned;
         private bool onTrain;
 
-        public Passenger(Station currentStation)
+        public Passenger(Station currentStation, Station targetStation)
         {
-            this.targetStation = currentStation;
+            this.currentStation = currentStation;
+            this.targetStation = targetStation;
             this.state = State.Idle;
             this.onTrain = false;
+            passId = globalPassId;
+            globalPassId++;
         }
 
-        public void BookJourney(Station targetStation, Train trainAssigned)
+        public void BookJourney(Train trainAssigned)
         {
-            this.targetStation = targetStation;
             this.trainAssigned = trainAssigned;
         }
 
@@ -48,6 +51,10 @@ namespace NEAPrototype_Transport
                 this.targetStation = null;
                 this.trainAssigned = null;
             }
+        }
+
+        protected override void Process()
+        {
         }
     }
 }
