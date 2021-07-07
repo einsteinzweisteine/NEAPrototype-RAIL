@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace NEAPrototype_Transport
 {
+    /// <summary>
+    /// Server class handles pseudo-networking between Trains, Passengers and itself - it is responsible for assigning Passengers to Trains
+    /// </summary>
     public class Server:SimObject
     {
-        public Server()
+        protected override void Process(List<Event> eventss)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

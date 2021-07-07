@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace NEAPrototype_Transport
 {
+    /// <summary>
+    /// Class represents the physical location of places (tracks, stations, etc.)
+    /// </summary>
     public abstract class Place:SimObject
     {
+        //id is used to uniquely identify each Place object
         private static int idGlobal = 0;
         private readonly int id;
         private List<Place> connPlace;
+
         protected int Id
         {
             get
@@ -26,22 +31,34 @@ namespace NEAPrototype_Transport
             connPlace = new List<Place> { };
         }
 
+        /// <summary>
+        /// Adds another connection the list of connections. In this prototype, there will only be one connecting place as we are dealing with a circle
+        /// </summary>
+        /// <param name="place">The Place object that should be connected to this Place</param>
         public void addConn(Place place)
         {
             connPlace.Add(place);
         }
     }
 
+    /// <summary>
+    /// Station inherits from Place; it represents locations where passengers are created, picked up and then dropped off by Trains
+    /// </summary>
     public class Station:Place
     {
+        //statId is used to uniquely identify each Station object
         private static int statIdGlobal = 0;
         private readonly int statId;
+        public const int trsmRange = 500;
 
-        private List<Station> statList = new List<Station> { };
+        private  static List<Station> statList = new List<Station> { };
 
-        private int[] pos;
+        //dist is the distance (in metres) from this station to the next station
+        private int dist;
+        //nickname of the station
         private string name;
         private List<Track> trackConn;
+
         public string Name
         {
             get
@@ -50,22 +67,37 @@ namespace NEAPrototype_Transport
             }
         }
 
-        public Station(string name, int[] pos, List<Track> trackConn)
+        public Station(int dist, List<Track> trackConn = null, string name = null)
         {
             statId = statIdGlobal;
             statIdGlobal++;
 
+            statList.Add(this);
+
             this.name = name;
-            this.pos = pos;
+            this.dist = dist;
             this.trackConn = trackConn;
         }
 
-        protected override void Process()
+        /// <summary>
+        /// Station transmits its presence to all Train objects nearby
+        /// </summary>
+        /// <param name="events"></param>
+        protected override void Process(List<Event> events)
         {
-
+            foreach (Train tr in Train.TrList)
+            {
+                if (tr.isCloseToStation(this))
+                {
+                    new NetworkEvent(this, tr, NtwMsg.PRS, new object[] { this });
+                }
+            }
         }
     }
 
+    /// <summary>
+    /// Track objects represent stretches that Trains can travel down.
+    /// </summary>
     public class Track:Place
     {
         private static int trckIdGlobal = 0;
@@ -73,7 +105,9 @@ namespace NEAPrototype_Transport
 
         private static List<Track> trckList = new List<Track> { };
 
-        private Place lwrConn;
+        // private Place lwrConn;
+
+        // For the prototype, we will only allow tracks to connect to exclusively two other Station objects
         private Place uppConn;
 
 
@@ -84,13 +118,14 @@ namespace NEAPrototype_Transport
             trckList.Add(this);
         }
         
-        public void addlwrConn(Place lwrConn)
+        public void AdduppConn(Place uppConn)
         {
-            this.lwrConn = lwrConn;
+            this.uppConn = uppConn;
         }
 
-        protected override void Process()
+        protected override void Process(List<Event> events)
         {
+            //No process required (we can treat this object as a constant)
         }
     }
 }

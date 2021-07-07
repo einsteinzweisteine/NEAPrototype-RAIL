@@ -13,7 +13,7 @@
 	* Will be a strictly straight line
  * Stations will:
 	* Be connected by exclusively two tracks
-	* Will have a transmitter broadcasting their station name, and this transmitter will have a range of 50 m 
+	* Will have a transmitter broadcasting their station name, and this transmitter will have a range
  * Passengers will be instantiated at a station, then be given a target station and a specific train
 	* A central server will register a request from the passenger to go to a target station
 	* The server will then assign the passenger to a specific train and vice versa
@@ -35,9 +35,6 @@
 
 
 ## Train-Train protocol signals
- * ACK - acknowledgement
-	* Self
-	* Target train
  * STS - at station, stopped (global)
 	* Station
  * STD - approaching station, decelerating (global)
@@ -46,8 +43,6 @@
 	* Station
 
 ## Server-Train protocol signals
- * STACK - server-train acknowledgement
-	* Target train
  * NPR - new passenger request
 	* Target train
  * PDT - passenger data transfer
@@ -57,8 +52,6 @@
 
 
 ## Train-Server protocol signals
- * SACK - server acknowledgement
-	* Self
  * CLK - regular clock signal, updates the server on the position of the train
 	* Self
 	* Position
